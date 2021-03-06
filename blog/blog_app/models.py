@@ -27,14 +27,17 @@ class BlogPostComment(models.Model):
         return self.comment
 
 class BlogPost(models.Model):
+    id = models.BigIntegerField(primary_key=True, unique=True)
     image = models.ImageField()
     title = models.CharField(max_length=100)
     description = models.CharField(max_length=500)
-    author = models.CharField(max_length=50)
+    # author = models.CharField(max_length=50)
+    author = models.ForeignKey(Author, on_delete=models.CASCADE)
     date = models.DateField(auto_now_add=True)
     tags = models.ManyToManyField(Tag)
     content = models.TextField()
-    team = models.ManyToManyField(Author)
+    published = models.BooleanField(null=False, blank=False)
+    # team = models.ManyToManyField(Author)
     whatsapp_message = models.CharField(max_length=1000,null=True)
     facebook_link = models.CharField(max_length=100,null=True)
     comments = models.ManyToManyField(BlogPostComment,blank=True)

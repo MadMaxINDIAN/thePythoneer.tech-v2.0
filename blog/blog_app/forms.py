@@ -6,6 +6,11 @@ from django.contrib.auth.models import User
 class BlogPostForm(ModelForm):
     class Meta:
         model = BlogPost
+        fields = ['id','image','title','description','author','content']
+
+class EditorBlogPostForm(ModelForm):
+    class Meta:
+        model = BlogPost
         fields = '__all__'
 
 class FeedbackForm(ModelForm):

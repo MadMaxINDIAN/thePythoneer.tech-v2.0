@@ -1,4 +1,7 @@
 function myFunction() {
+    // ID
+    var element = document.getElementById("id_id");
+    element.classList.add("form-control");
     // TITLE
     var element = document.getElementById("id_title");
     element.classList.add("form-control");
@@ -12,17 +15,17 @@ function myFunction() {
     element = document.getElementById("id_author");
     element.classList.add("form-control");
     // TAG
-    element = document.getElementById("id_tags");
-    element.classList.add("custom-select");
+    // element = document.getElementById("id_tags");
+    // element.classList.add("custom-select");
     // TEAM
-    element = document.getElementById("id_team");
-    element.classList.add("custom-select");
+    // element = document.getElementById("id_team");
+    // element.classList.add("custom-select");
     // WhatsApp
-    element = document.getElementById("id_whatsapp_message");
-    element.classList.add("form-control");
+    // element = document.getElementById("id_whatsapp_message");
+    // element.classList.add("form-control");
     // Facebook
-    element = document.getElementById("id_facebook_link");
-    element.classList.add("form-control");
+    // element = document.getElementById("id_facebook_link");
+    // element.classList.add("form-control");
 
 }
 myFunction();

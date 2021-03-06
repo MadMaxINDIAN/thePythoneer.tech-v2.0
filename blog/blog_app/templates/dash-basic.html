@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Static assets -->
+{% load static %}
+
+<head>
+<meta charset="utf-8" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<title>
+    Dashboard | thePythoneer.tech
+</title>
+
+<!--     Fonts and icons     -->
+<link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800" rel="stylesheet" />
+<link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+
+<!-- CSS Files -->
+<link href="{% static '/css/dashboard.css' %}" rel="stylesheet">
+
+</head>
+
+<body class="">
+<div class="wrapper">
+
+    {% include 'includes/sidebar.html' %}
+
+    <div class="main-panel">
+
+    {% include 'includes/navigation.html' %}
+
+    <div class="content">
+
+        {% block content %}{% endblock content %}
+
+    </div>
+
+    {% include 'includes/footer.html' %}
+
+    </div>
+    
+</div>
+
+{% include 'includes/scripts.html' %}
+
+{% include 'includes/scripts-sidebar.html' %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}
+
+</body>
+
+</html>
