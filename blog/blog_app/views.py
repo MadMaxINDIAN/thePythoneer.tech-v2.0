@@ -53,8 +53,6 @@ def create_blog(req):
     if req.method == 'POST':
         form = BlogPostForm(req.POST, req.FILES)
         if form.is_valid():
-            print(form)
-            return HttpResponse("Success")
             form.save()
             return redirect("/")
     return render(req, 'create_blog.html',{'title': "Create Blog Post",'blog': "thePythonner.tech", 'form': form, 'authenticated': req.user.is_authenticated})

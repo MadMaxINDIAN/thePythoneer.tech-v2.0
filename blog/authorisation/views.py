@@ -4,8 +4,13 @@ from django.contrib import messages
 from json import dumps
 from django.contrib.auth.decorators import login_required
 from .forms import *
+from .models import *
 from .decorators import *
 from django.contrib.auth import authenticate, login, logout
+from django.conf import settings 
+from django.core.mail import send_mail 
+from django.template.loader import render_to_string
+
 
 # Create your views here.
 # # # # # # # # # # # # # # # # # # # # #    USER SECTION    # # # # # # # # # # # # # # # # # # # # # 
@@ -21,7 +26,17 @@ def create_user(req):
         if form.is_valid():
             form.save()
             user = form.cleaned_data.get('username')
-            messages.success(req, "Account has been created for " + user)
+            user = User.objects.get(username=user)
+            Profile(id=user.id, user=user).save()
+            messages.success(req, "Account has been created for " + user.username)
+            
+            # SENDING MAIL TO THE USER
+            subject = 'Welcome to thePythoneer world'
+            message = f'Hi {user.username}, thank you for registering in thePythoneer.tech.'
+            email_from = settings.EMAIL_HOST_USER
+            recipient_list = [user.email, ] 
+            send_mail( subject, message, email_from, recipient_list )
+
             return redirect("/u/login_user")
         else:
             for key in form.errors:
@@ -44,10 +59,29 @@ def login_user(req):
         user = authenticate(req, username=username, password=password)
         if user is not None:
             login(req, user)
+            subject = 'Welcome to thePythoneer world'
+            message = f'Hi {user.username}, thank you for registering in thePythoneer.tech.'
+            email_from = settings.EMAIL_HOST_USER
+            recipient_list = [user.email, ]
+            send_mail( subject, message, email_from, recipient_list, html_message=render_to_string("register-mail.html", {'username': req.user.username}))
             return redirect("/")
         else:
             messages.info(req, "Username or Password is incorrect")
     return render(req,"login_user.html",data)
+
+@login_required(login_url="/u/login_user")
+def profile(req,id):
+    try:
+        pro = Profile.objects.get(id=id)
+    except:
+        return render(req, "user_not_found.html")
+    context = {
+        'user': pro.user,
+        'img': pro.image,
+        'author': pro.author,
+        'profile': pro
+    }
+    return render(req, "page-user.html", context)
 
 def logout_user(req):
     logout(req)

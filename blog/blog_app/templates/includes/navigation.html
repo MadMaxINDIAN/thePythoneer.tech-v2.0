@@ -2,7 +2,60 @@
 {% load static %}
 
       <!-- Navbar -->
-      <nav class="navbar navbar-expand-lg navbar-absolute navbar-transparent">
+      <style>
+            .navbar-brand-img{
+              max-width: 240px;
+            }
+            .navbar-brand-img-mobile{
+              max-width: 175px;
+              display: none;
+            }
+            .navbar-brand-img-mobile-short{
+                display: none;
+                width: 140px;
+            }
+            @media only screen and (max-width: 430px){
+              .navbar-brand-img{
+                display: none;
+              }
+              .navbar-brand-img-mobile{
+                display: block;
+              }
+              .navbar-brand-img-mobile-short{
+                display: none;
+              }
+            }
+            @media only screen and (max-width: 370px){
+              .navbar-brand-img{
+                display: none;
+              }
+              .navbar-brand-img-mobile{
+                display: none;
+              }
+              .navbar-brand-img-mobile-short{
+                display: block;
+              }
+            }
+            @media only screen and (max-width: 200px){
+              .navbar-brand-img{
+                display: none;
+              }
+              .navbar-brand-img-mobile{
+                display: none;
+              }
+              .navbar-brand-img-mobile-short{
+                display: block;
+                width: 120px;
+              }
+              .navbar-brand {
+                margin-right: 0rem!important;
+              }
+              #navbar-button {
+                padding: 0px!important;
+              }
+            }
+      </style>
+      <nav class="navbar navbar-expand-lg navbar-absolute navbar-transparent" style="background: #000 !important">
         <div class="container-fluid">
           <div class="navbar-wrapper">
             <div class="navbar-toggle d-inline">
@@ -12,7 +65,11 @@
                 <span class="navbar-toggler-bar bar3"></span>
               </button>
             </div>
-            <a class="navbar-brand" href="javascript:void(0)">Dashboard</a>
+            <a class="navbar-brand" href="javascript:void(0)">
+              <img src="/static/images/logo_b_no_bg.png" class="navbar-brand-img" />
+              <img src="{% static 'images/logo_short_b_no_bg.png' %}" class="navbar-brand-img-mobile" />
+              <img src="{% static 'images/logo_no_bg.png' %}" class="navbar-brand-img-mobile-short" />
+            </a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-bar navbar-kebab"></span>

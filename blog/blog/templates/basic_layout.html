@@ -268,7 +268,7 @@
           }
         </style>
     </head>
-    <body style="background-color: #fff"><div class="page-wrapper">
+    <body style="background-color: #fff; min-width: 280px;"><div class="page-wrapper">
       <div class="nav-wrapper">
       <div class="container">
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark custom-navbar-background navbar-padding w-100">
@@ -334,17 +334,37 @@
                     </a></li>
                   </ul>
                 </li>
+                {% if authenticated == True %}
+                <li class="nav-item dropdown">
+                  <a class="nav-link navbar-item-color dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <div class="btn btn-dark custom-navbar-background no-border" style="font-size: 1.2rem;"><i class="fas fa-user"></i></div>
+                  </a>
+                  <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <li><a class="dropdown-item" href="#">
+                      <div class="store-menu"><i class="far fa-user-circle"></i> Profile</div>
+                    </a></li>
+                    <li><a class="dropdown-item" href="#">
+                      <div class="store-menu"><i class="fas fa-edit"></i> Author</div>
+                    </a></li>
+                  </ul>
+                </li>
+                {% endif %}
               </ul>
               <ul class="navbar-nav" style="position: relative; bottom: -5px;">
-                <li class="nav-item">
                 {% if authenticated == True %}
+                <li class="nav-item">
                   <a href="/u/logout_user"><button class="btn btn-danger me-1">Log out</button></a>
+                </li>
+                
                 {% else %}
+                <li class="nav-item">
                   <a href="/u/create_user"><button class="btn btn-warning me-1">Join</button></a>
+                </li>
+                <li class="nav-item">
                   <a href="/u/login_user"><button class="btn" style="color: #fff;">Sign In</button></a>
+                </li>
                 {% endif %}
                   {% comment %} <a class="nav-link navbar-item-color active" aria-current="page" href="#">Home</a> {% endcomment %}
-                </li>
               </ul>
             </div>
           </div>
@@ -523,7 +543,10 @@ document.getElementById("main-content").style.minHeight = pageHeight() + "px";
     
     {% comment %} document.getElementById('log').innerHTML = debug; {% endcomment %}
 }());
+
+{% if post %}
 window.onscroll = function() {myFunction()};
+{% endif %}
 
 function myFunction() {
   var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
